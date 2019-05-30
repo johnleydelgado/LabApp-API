@@ -18,12 +18,21 @@ class UserAuthController extends Controller
       $user = Users::where('u_username', '=', $uname)->first();
       
       if(Hash::check($password, $user->password)) {
-         return "login successfully";
+         $response["success"] = 1;
+         $response["message"] = "login successfully";
+         return response()->json($response);
+        
       }else{
-          return "Wrong Credentials";
+         $response["success"] = 0;
+         $response["message"] = "Wrong Credentials";
+         return response()->json($response);
+        
       }
       }else {
-         return "Wrong Credentials";
+         $response["success"] = 0;
+         $response["message"] = "Wrong Credentials";
+         return response()->json($response);
+        
       }
       }
 

@@ -20,5 +20,7 @@ Route::get('users/update/{id}','UserController@updateUsers'); //for updating use
 Route::post('users/delete/{id}','UserController@deleteUsers');  // for deleting user
 Route::get('users','UserController@index'); // for retrieving user
 
-Route::get('changepPassword','UserAuthController@updateUsersPassword'); //for change password user
+Route::get('changePassword','UserAuthController@updateUsersPassword'); //for change password user
 Route::post('login','UserAuthController@login'); //for logins
+
+Route::post('transaction','TransactionInformationController@createTransaction'); //for logins

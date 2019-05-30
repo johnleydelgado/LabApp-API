@@ -20,16 +20,19 @@ class UserController extends Controller
    public function createUsers(Request $request) {
       if (Users::where('u_emailaddress','=', $request->input('u_emailaddress'))->exists()) {
          
-          $response["message"] = "Email has been taken";
+         $response["message"] = "Email has been taken";
+         $response["success"] = 0;
          return response()->json($response);
          
       } elseif (Users::where('u_username','=', $request->input('u_username'))->exists()) {
+         $response["success"] = 0;
          $response["message"] = "Username has been taken";
          return response()->json($response);
          
       } else {
 
          $users = Users::create($request->all());
+         $response["success"] = 1;
          $response["message"] = "Register Successfully";
          return response()->json($response);
       }
