@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::post('users/registration','UserController@createUsers');   //for creating user
 Route::get('users/update/{id}','UserController@updateUsers'); //for updating user
@@ -23,4 +23,5 @@ Route::get('users','UserController@index'); // for retrieving user
 Route::get('changePassword','UserAuthController@updateUsersPassword'); //for change password user
 Route::post('login','UserAuthController@login'); //for logins
 
-Route::post('transaction','TransactionInformationController@createTransaction'); //for logins
+Route::post('transaction','TransactionInformationController@createTransaction'); //for creating patient transaction waiver
+Route::post('getTransaction','TransactionInformationController@getTransaction'); //for retrieving transaction
