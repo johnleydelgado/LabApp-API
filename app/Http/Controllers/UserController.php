@@ -8,27 +8,27 @@ use App\Users;
 use DB;
 class UserController extends Controller
 {
-   
+
    public function index(){
     $users  = Users::all();
     $response["users"] = $users;
     $response["success"] = 1;
     return response()->json($response);
    }
-   
+
    //Create
-   public function createUsers(Request $request) {
+   public function store(Request $request) {
       if (Users::where('u_emailaddress','=', $request->input('u_emailaddress'))->exists()) {
-         
+
          $response["message"] = "Email has been taken";
          $response["success"] = 0;
          return response()->json($response);
-         
+
       } elseif (Users::where('u_username','=', $request->input('u_username'))->exists()) {
          $response["success"] = 0;
          $response["message"] = "Username has been taken";
          return response()->json($response);
-         
+
       } else {
 
          $users = Users::create($request->all());
@@ -38,17 +38,18 @@ class UserController extends Controller
       }
    }
 
-   public function updateUsers(Request $request,$id) {
+   public function update(Request $request,$id) {
       $users = Users::find($id);
       $users->update($request->all());
       return response()->json($users);
    }
-   
 
 
-    public function deleteUsers($id) {
+
+    public function destroy($id) {
         $users = Users::find($id);
         $users->delete();
-       return response()->json('Removed successfully.');
+        $response["message"] = "Successfully deleted.";
+       return response()->json($response);
     }
 }

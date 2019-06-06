@@ -8,11 +8,15 @@ class Users extends Model
 {
     protected $table = 'lab_users';
     protected $primaryKey = 'user_id';
-    
+
     protected $guarded = ['user_id', 'timestamps'];
-    
+
     public function setPasswordAttribute($password)
-    {   
+    {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function institution(){
+        return $this->belongsTo(institution::class, 'inst_id');
     }
 }

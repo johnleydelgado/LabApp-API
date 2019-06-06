@@ -25,3 +25,9 @@ Route::post('login','UserAuthController@login'); //for logins
 
 Route::post('transaction','TransactionInformationController@createTransaction'); //for creating patient transaction waiver
 Route::post('getTransaction','TransactionInformationController@getTransaction'); //for retrieving transaction
+
+Route::resource('institution', 'InstitutionController');
+Route::resource('users', 'UserController');
+Route::resource('patient', 'PatientController');
+
+Route::post('getPatient','PatientController@getPatient');  //for retrieving patient
