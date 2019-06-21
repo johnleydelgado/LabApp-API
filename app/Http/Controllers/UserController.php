@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,6 +13,23 @@ class UserController extends Controller
     $response["users"] = $users;
     $response["success"] = 1;
     return response()->json($response);
+   }
+
+   public function getUserWithin(Request $request){
+
+    //$inst_id = $request->input('inst_id');
+
+    // if (Users::where('inst_id','=', $inst_id)) { where('inst_id','=',$inst_id)->
+
+        $users  = Users::where('u_role','=','2')->get();
+        $response["users"] = $users;
+        // foreach($users as $user){
+        //     $response["institution_name"] = $user->institution->i_name;
+        // }
+
+        return response()->json($response);
+    // }
+
    }
 
    //Create
@@ -41,7 +57,8 @@ class UserController extends Controller
    public function update(Request $request,$id) {
       $users = Users::find($id);
       $users->update($request->all());
-      return response()->json($users);
+      $response["message"] = "Updated Successfully";
+      return response()->json($response);
    }
 
 

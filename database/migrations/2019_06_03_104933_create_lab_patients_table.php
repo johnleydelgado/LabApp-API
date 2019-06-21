@@ -14,11 +14,14 @@ class CreateLabPatientsTable extends Migration
     public function up()
     {
         Schema::create('lab_patients', function (Blueprint $table) {
-            $table->increments('patient_id');
+
+            $table->increments("id");
+            $table->integer('patient_id');
             $table->integer('inst_id');
             $table->string('p_lastname',50)->nullable();
             $table->string('p_firstname',50)->nullable();
             $table->string('p_middlename',50)->nullable();
+            $table->string("p_gender",20)->nullable();
             $table->date('p_birthday')->nullable();
             $table->string('p_address',50)->nullable();
             $table->string('p_email',50)->nullable();

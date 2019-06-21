@@ -19,6 +19,7 @@ class UserAuthController extends Controller
          $response["message"] = "login successfully";
          $response["user_id"] = $user->user_id;
          $response["roles"] = $user->u_role;
+         $response["inst_id"] = $user->inst_id;
          return response()->json($response);
 
       }else{
@@ -37,7 +38,6 @@ class UserAuthController extends Controller
 
    public function updateUsersPassword(Request $request) {
       $email = $request->input('email');
-
 
       if(Users::where('u_emailaddress','=', $request->input('email'))->exists()){
 

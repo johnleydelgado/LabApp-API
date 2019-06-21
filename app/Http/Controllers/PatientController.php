@@ -17,15 +17,22 @@ class PatientController extends Controller
     }
 
     public function store(Request $request){
-        Patient::create($request->all());
-        $response["message"] = "Register Successfully";
-        return response()->json($response);
+        if(Patient::where('patient_id','=', $request->input('patient_id'))->exists())
+        {
+            $response["message"] = "Patient ID is not available";
+            return response()->json($response);
+        }else{
+            Patient::create($request->all());
+            $response["message"] = "Register Successfully";
+            return response()->json($response);
+
+        }
     }
 
     public function update(Request $request,$id){
         $patient = Patient::find($id);
         $patient->update($request->all());
-        $response["message"] = "Register Successfully";
+        $response["message"] = "Updated Successfully";
         return response()->json($response);
     }
 
@@ -48,11 +55,20 @@ class PatientController extends Controller
     }
 
     public function getPatient(Request $request){
-        $id = $request->input('user_id');
 
-        if (Patient::where('user_id','=', $id)) {
+        $inst_id = $request->input('inst_id');
+        if (Patient::where('inst_id','=', $inst_id)) {
+            $patient  = Patient::where('inst_id','=',$inst_id)->get();
+            $response["patient"] = $patient;
+            return response()->json($response);
+        }
+    }
 
-            $patient  = Patient::where('user_id','=',$id)->get();
+    public function getPatient2(Request $request){
+
+        $u_id = $request->input('user_id');
+        if (Patient::where('user_id','=', $u_id)) {
+            $patient  = Patient::where('user_id','=',$u_id)->get();
             $response["patient"] = $patient;
             return response()->json($response);
         }
